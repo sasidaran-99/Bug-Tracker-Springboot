@@ -1,4 +1,4 @@
-# 🐞 Bug Tracker Backend
+# Bug Tracker Backend
 
 A structured backend application built to manage bugs/issues in a system.  
 This project demonstrates real-world backend development concepts including REST APIs, database integration, CRUD operations, and pagination.
