@@ -1,6 +1,7 @@
 package com.bugtracker.controller;
 import com.bugtracker.model.Bug;
 import com.bugtracker.Service.BugService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class Bugcontroller {
         this.bs=bs;
     }
     @PostMapping
-    public Bug createbug(@RequestBody Bug bug){
+    public Bug createbug(@Valid @RequestBody Bug bug){
         return bs.createbug(bug);
     }
     @GetMapping
