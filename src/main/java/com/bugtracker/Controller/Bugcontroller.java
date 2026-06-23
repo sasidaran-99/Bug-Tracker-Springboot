@@ -26,7 +26,7 @@ public class Bugcontroller {
         return bs.deletebug(id);
     }
     @PutMapping("/{id}")
-    public Bug updatebug(@PathVariable Long id,@RequestBody Bug bug){
+    public Bug updatebug(@PathVariable Long id,@Valid @RequestBody Bug bug){
          return bs.updatebug(id,bug);
     }
     @GetMapping("/page")
