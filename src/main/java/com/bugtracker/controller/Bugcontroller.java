@@ -1,6 +1,9 @@
 package com.bugtracker.controller;
+
+import com.bugtracker.dto.BugRequestDTO;
+import com.bugtracker.dto.BugResponseDTO;
 import com.bugtracker.model.Bug;
-import com.bugtracker.Service.BugService;
+import com.bugtracker.service.BugService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +17,8 @@ public class Bugcontroller {
         this.bs=bs;
     }
     @PostMapping
-    public Bug createbug(@Valid @RequestBody Bug bug){
-        return bs.createbug(bug);
+    public BugResponseDTO createbug(@Valid @RequestBody BugRequestDTO bugRequestDTO){
+        return bs.createbug(bugRequestDTO);
     }
     @GetMapping
     public List<Bug> getallbugs(){

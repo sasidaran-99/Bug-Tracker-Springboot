@@ -1,4 +1,4 @@
-package com.bugtracker.Repository;
+package com.bugtracker.repository;
 import com.bugtracker.model.Bug;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
