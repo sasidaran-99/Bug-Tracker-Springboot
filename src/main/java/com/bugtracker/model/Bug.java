@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import com.bugtracker.enums.Priority;
+import com.bugtracker.enums.Status;
 
 import java.time.LocalDateTime;
 
@@ -21,8 +23,10 @@ public class Bug {
 
     private String description;
 
-    private String priority;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }
