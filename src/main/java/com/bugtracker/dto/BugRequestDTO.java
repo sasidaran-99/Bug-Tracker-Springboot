@@ -1,12 +1,16 @@
 package com.bugtracker.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.bugtracker.enums.Priority;
+import com.bugtracker.enums.Status;
+
+import jakarta.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -20,17 +24,9 @@ public class BugRequestDTO {
     @NotBlank( message = "Description cannot be empty")
     private String description;
 
-    @NotBlank( message ="Priority cannot be empty")
-    @Pattern(
-            regexp = "LOW|MEDIUM|HIGH",
-            message = "Priority must be LOW, MEDIUM, or HIGH"
-    )
-    private String priority;
+    @NotNull(message = "Priority cannot be empty")
+    private Priority priority;
 
-    @NotBlank( message ="Status cannot be empty")
-    @Pattern(
-            regexp = "OPEN|IN_PROGRESS|RESOLVED|CLOSED",
-            message = "Status must be OPEN, IN_PROGRESS, RESOLVED, or CLOSED"
-    )
-    private String status;
+    @NotNull(message = "Status cannot be empty")
+    private Status status;
 }
