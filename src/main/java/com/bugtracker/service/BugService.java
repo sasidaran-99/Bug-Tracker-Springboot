@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import com.bugtracker.dto.BugRequestDTO;
 import com.bugtracker.dto.BugResponseDTO;
+import com.bugtracker.exception.BugNotFoundException;
 
 @Service
 public class BugService {
@@ -45,25 +46,23 @@ public class BugService {
         return br.findAll();
     }
     public String deletebug(Long id){
-        if(!br.existsById(id)){
-            return " Not found";
-        }
-        br.deleteById(id);
+        Bug bug = br.findById(id)
+                .orElseThrow(() -> new BugNotFoundException("Bug not found with id " + id));
+
+        br.delete(bug);
         return "Bug deleted successfully";
     }
+    public Bug updatebug(Long id, Bug update){
 
-    public Bug updatebug(Long id,Bug update){
-        Bug existing=br.findById(id).orElse(null);
-        if(existing!=null){
-            existing.setTitle(update.getTitle());
-            existing.setDescription(update.getDescription());
-            existing.setPriority(update.getPriority());
-            existing.setStatus(update.getStatus());
+        Bug existing = br.findById(id)
+                .orElseThrow(() -> new BugNotFoundException("Bug not found with id " + id));
 
-            return br.save(existing);
+        existing.setTitle(update.getTitle());
+        existing.setDescription(update.getDescription());
+        existing.setPriority(update.getPriority());
+        existing.setStatus(update.getStatus());
 
-        }
-        return null;
+        return br.save(existing);
     }
     public Page<Bug> pagination(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
