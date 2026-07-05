@@ -5,6 +5,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,5 +30,13 @@ public class GlobalExceptionHandler {
                         ));
 
         return errors;
+    }
+    @ExceptionHandler(BugNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleBugNotFound(BugNotFoundException ex) {
+
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 }
